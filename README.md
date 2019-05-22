@@ -61,3 +61,29 @@ public class Swagger {
     }
 }
 ```
+## Remove _class from Mongo documents - Spring Data MongoDB
+
+```java
+@Configuration
+@EnableMongoAuditing
+public class MongoDB {
+    /**
+     * Removes _class field in mongo document
+     * Fixes Couldn't find PersistentEntity from auditing https://jira.spring.io/browse/DATAMONGO-1999
+     *
+     * @param mongoDbFactory must not be {@literal null}.
+     * @return MongoTemplate
+     * @throws Exception
+     */
+    @Bean
+    public MappingMongoConverter mappingMongoConverter(MongoDbFactory mongoDbFactory, MongoMappingContext mongoMappingContext) {
+
+        DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDbFactory);
+        MappingMongoConverter converter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
+        converter.setTypeMapper(new DefaultMongoTypeMapper(null));
+
+        return converter;
+    }
+}
+```
+
