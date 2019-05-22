@@ -61,6 +61,14 @@ public class Swagger {
     }
 }
 ```
+## Couldn't find PersistentEntity
+Problem
+```
+java.lang.IllegalArgumentException: Couldn't find PersistentEntity for type class com.github.kdlug.model.Person!
+```
+
+If you want to enable mongo auditing, you need to remove your MongoConfig class, use config file to define your mongodb connection and everything will work.
+
 ## Remove _class from Mongo documents - Spring Data MongoDB
 
 ```java
