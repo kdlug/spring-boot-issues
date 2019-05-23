@@ -60,7 +60,39 @@ public class Swagger {
                 .build();
     }
 }
+
+In idea:
+
+```console
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call the method com.google.common.collect.FluentIterable.append(Ljava/lang/Iterable;)Lcom/google/common/collect/FluentIterable; but it does not exist. Its class, com.google.common.collect.FluentIterable, is available from the following locations:
+
+    jar:file:/home/kdlug/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/15.0/ed727a8d9f247e2050281cb083f1c77b09dcb5cd/guava-15.0.jar!/com/google/common/collect/FluentIterable.class
+    jar:file:/home/kdlug/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/27.0.1-jre/bd41a290787b5301e63929676d792c507bbc00ae/guava-27.0.1-jre.jar!/com/google/common/collect/FluentIterable.class
+
+It was loaded from the following location:
+
+    file:/home/kdlug/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/15.0/ed727a8d9f247e2050281cb083f1c77b09dcb5cd/guava-15.0.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains a single, compatible version of com.google.common.collect.FluentIterable
 ```
+For multi project application make sure to add guava to all projects / or subprojects.
+
+build.gradle
+```
+allprojects {
+    implementation('com.google.guava:guava:20.0')
+}
+```
+
 ## Couldn't find PersistentEntity
 Problem
 ```
